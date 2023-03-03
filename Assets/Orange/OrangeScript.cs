@@ -31,7 +31,7 @@ public class OrangeScript : MonoBehaviour
         //if the object is in layer 3, addscore
         if(collision.gameObject.layer == 3 && logic.birdAlive && !(animator.GetBool("Collected"))){
             animator.SetBool("Collected" , true);
-            logic.addScore(1);
+            logic.addOranges(1);
         }     
     }
 }
