@@ -7,20 +7,16 @@ using TMPro;
 
 public class LogicScript : MonoBehaviour
 {
-    public int playerScore;
-    public int highScore;
-    public int playerOranges;
-    public int totalOranges;
-    public TMP_Text scoreText;
-    public TMP_Text orangesText;
-    public TMP_Text highScoreText;
-    public TMP_Text totalOrangesText;
+    public int playerScore, highScore, playerOranges, totalOranges;
+    public TMP_Text scoreText, orangesText, highScoreText, totalOrangesText;
     public bool birdAlive;
     public GameObject gameOverScreen;
+    public SaveObject saveData;
  
     void Start(){
-        highScore = PlayerPrefs.GetInt("HighScore");
-        totalOranges = PlayerPrefs.GetInt("Oranges");
+        saveData = SaveManager.Load();
+        highScore = saveData.highScore;
+        totalOranges = saveData.oranges;
     }
     
     //makes it possible to call function in unity with the extra menu on top right
@@ -40,19 +36,21 @@ public class LogicScript : MonoBehaviour
     }
  
     public void gameOver(){
+        //Checks for highscore and oranges
         if(playerScore > highScore){
             highScore = playerScore;   
         }
         totalOranges += playerOranges;
 
-        saveData(highScore,totalOranges);
+        //Saves any data from run
+        saveData.highScore = highScore;
+        saveData.oranges = totalOranges;
+
+        SaveManager.Save(saveData);
+
+        //Display Game Over Screen
         highScoreText.text = "High Score: " + highScore.ToString();
         totalOrangesText.text = "Total Oranges: " + totalOranges.ToString();
         gameOverScreen.SetActive(true);
-    }
-
-    public void saveData(int score, int oranges){
-        PlayerPrefs.SetInt("HighScore", score);
-        PlayerPrefs.SetInt("Oranges", oranges);
     }
 }

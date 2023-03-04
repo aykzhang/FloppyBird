@@ -7,30 +7,36 @@ public class StartLogicScript : MonoBehaviour
 {
     
     public int highScore;
-    public int oranges;
+    public int totalOranges;
     public TMP_Text scoreResetText;
     public TMP_Text orangesResetText;
+    public SaveObject saveData;
     // Start is called before the first frame update
     void Start()
     {
-        highScore = PlayerPrefs.GetInt("HighScore");
-        oranges = PlayerPrefs.GetInt("Oranges");
+        saveData = SaveManager.Load();
+        highScore = saveData.highScore;
+        totalOranges = saveData.oranges;
     }
     public void resetHighScore(){
-        PlayerPrefs.SetInt("HighScore", 0);
+        saveData.highScore = 0;
+        SaveManager.Save(saveData);
     }
 
     public void resetOranges(){
-        PlayerPrefs.SetInt("Oranges", 0);
+        saveData.oranges = 0;
+        SaveManager.Save(saveData);
     }
 
+    //Displays the current highscore count when the "Reset Highscore" Button is pressed
     public void highScoreButton(){
-        highScore = PlayerPrefs.GetInt("HighScore");
+        highScore = saveData.highScore;
         scoreResetText.text = "Reset Highscore (" + highScore + ")?";
     }
 
+    //Displays the current oranges count when the "Reset Oranges" Button is pressed
     public void orangesButton(){
-        oranges = PlayerPrefs.GetInt("Oranges");
-        orangesResetText.text = "Reset Oranges (" + oranges + ")?";
+        totalOranges = saveData.oranges;
+        orangesResetText.text = "Reset Oranges (" + totalOranges + ")?";
     }
 }

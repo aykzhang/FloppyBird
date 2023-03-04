@@ -26,9 +26,9 @@ public class OrangeScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    //Add one to oranges when bird collides with an orange
     private void OnTriggerEnter2D(Collider2D collision){
-        //assign bird to layer 3 in Unity
-        //if the object is in layer 3, addscore
         if(collision.gameObject.layer == 3 && logic.birdAlive && !(animator.GetBool("Collected"))){
             animator.SetBool("Collected" , true);
             logic.addOranges(1);

@@ -17,12 +17,14 @@ public class BirdScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Press space to go up
         if (Input.GetKeyDown(KeyCode.Space) && logic.birdAlive)
         {
             myRigidBody.velocity = Vector2.up * flapStrength;
         }
     }
 
+    //Game Over Trigger
     private void OnCollisionEnter2D(Collision2D collision){
         if (logic.birdAlive == true){
             logic.gameOver();
