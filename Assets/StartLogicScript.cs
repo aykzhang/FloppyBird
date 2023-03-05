@@ -39,4 +39,8 @@ public class StartLogicScript : MonoBehaviour
         totalOranges = saveData.oranges;
         orangesResetText.text = "Reset Oranges (" + totalOranges + ")?";
     }
+
+    public void setSelectedCharacter(int character){
+        saveData.selectedCharacter = character;
+    }
 }
