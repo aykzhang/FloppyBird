@@ -74,6 +74,7 @@ public class CharacterManagerScript : MonoBehaviour
             unlockText.text = getConditions(selectedCharacter);
             select.gameObject.SetActive(false);
             buy.gameObject.SetActive(true);
+            cImage.color = Color.black;
             if(saveData.oranges < getCharacter(selectedCharacter).cost){
                 buy.interactable = false;
                 buy.image.sprite = notEnoughSprite;
@@ -84,6 +85,7 @@ public class CharacterManagerScript : MonoBehaviour
             }
         }
         else{
+            cImage.color = Color.white;
             unlockText.text = "";
             select.gameObject.SetActive(true);
             buy.gameObject.SetActive(false);
