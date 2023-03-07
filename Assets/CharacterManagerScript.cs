@@ -10,7 +10,7 @@ public class CharacterManagerScript : MonoBehaviour
 {
     public Image cImage;
     public List<Sprite> characters = new List<Sprite>();
-    private int selectedCharacter = 0;
+    private int selectedCharacter;
     public SaveObject saveData;
     public TMP_Text nameText, unlockText, totalOranges;
     public Button select, buy;
@@ -19,12 +19,14 @@ public class CharacterManagerScript : MonoBehaviour
     void Start()
     {
         saveData = SaveManager.Load();
+        selectedCharacter = saveData.selectedCharacter;
         totalOranges.text = saveData.oranges.ToString();
+        displayData(saveData.selectedCharacter);
     }
 
     public void NextOption(){
         selectedCharacter += 1;
-        if(selectedCharacter == characters.Count){
+        if(selectedCharacter >= characters.Count){
             selectedCharacter = 0;
         }
         displayData(selectedCharacter);
