@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class StartLogicScript : MonoBehaviour
 {
     
-    public int highScore;
-    public int totalOranges;
-    public TMP_Text scoreResetText;
-    public TMP_Text orangesResetText;
+    public int highScore, totalOranges;
+    public TMP_Text scoreResetText, orangesResetText;
     public SaveObject saveData;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +41,4 @@ public class StartLogicScript : MonoBehaviour
         orangesResetText.text = "Reset Oranges (" + totalOranges + ")?";
     }
 
-    public void setSelectedCharacter(int character){
-        saveData.selectedCharacter = character;
-    }
 }
