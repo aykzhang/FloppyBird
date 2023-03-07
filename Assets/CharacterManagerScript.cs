@@ -13,8 +13,8 @@ public class CharacterManagerScript : MonoBehaviour
     private int selectedCharacter = 0;
     public SaveObject saveData;
     public TMP_Text nameText, unlockText, totalOranges;
-    public Sprite buySprite, selectSprite;
-    public Button select;
+    public Button select, buy;
+    public Sprite buySprite, notEnoughSprite;
 
     void Start()
     {
@@ -43,28 +43,50 @@ public class CharacterManagerScript : MonoBehaviour
         SaveManager.Save(saveData);
     }
 
+    public void buyCharacter(){
+        saveData.oranges -= getCharacter(selectedCharacter).cost;
+        getCharacter(selectedCharacter).unlocked = true;
+        SaveManager.Save(saveData);
+        displayData(selectedCharacter);
+    }
+
     public string getName(int selectedCharacter){
-        return saveData.characters[selectedCharacter].characterName;
+        return getCharacter(selectedCharacter).characterName;
     }
 
     public bool isUnlocked(int selectedCharacter){
-        return saveData.characters[selectedCharacter].unlocked;
+        return getCharacter(selectedCharacter).unlocked;
     }
 
     public string getConditions(int selectedCharacter){
-        return saveData.characters[selectedCharacter].unlockString;
+        return getCharacter(selectedCharacter).unlockString;
+    }
+
+    public CharacterData getCharacter(int selectedCharacter){
+        return saveData.characters[selectedCharacter];
     }
 
     public void displayData(int selectedCharacter){
         cImage.sprite = characters[selectedCharacter];
         nameText.text = getName(selectedCharacter);
+        totalOranges.text = saveData.oranges.ToString();
         if(!isUnlocked(selectedCharacter)){
             unlockText.text = getConditions(selectedCharacter);
-            select.image.sprite = buySprite;
+            select.gameObject.SetActive(false);
+            buy.gameObject.SetActive(true);
+            if(saveData.oranges < getCharacter(selectedCharacter).cost){
+                buy.interactable = false;
+                buy.image.sprite = notEnoughSprite;
+            }
+            else{
+                buy.interactable = true;
+                buy.image.sprite = buySprite;
+            }
         }
         else{
             unlockText.text = "";
-            select.image.sprite = selectSprite;
+            select.gameObject.SetActive(true);
+            buy.gameObject.SetActive(false);
         }
     }
 }
