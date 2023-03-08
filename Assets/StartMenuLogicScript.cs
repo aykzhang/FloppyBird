@@ -6,21 +6,29 @@ using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 
-public class CharacterManagerScript : MonoBehaviour
+public class StartMenuLogicScript : MonoBehaviour
 {
     public Image cImage;
     public List<Sprite> characters = new List<Sprite>();
     private int selectedCharacter;
     public SaveObject saveData;
-    public TMP_Text nameText, unlockText, totalOranges;
+    public TMP_Text nameText, unlockText, totalOrangesText;
     public Button select, buy;
     public Sprite buySprite, notEnoughSprite;
+    public int highScore, totalOranges;
+    public TMP_Text scoreResetText, orangesResetText;
 
-    void Start()
+    void Start(){
+        saveData = SaveManager.Load();
+        highScore = saveData.highScore;
+        totalOranges = saveData.oranges;
+    }
+
+    public void Open()
     {
         saveData = SaveManager.Load();
         selectedCharacter = saveData.selectedCharacter;
-        totalOranges.text = saveData.oranges.ToString();
+        totalOrangesText.text = saveData.oranges.ToString();
         displayData(saveData.selectedCharacter);
     }
 
@@ -43,6 +51,7 @@ public class CharacterManagerScript : MonoBehaviour
     public void setSelectedCharacter(){
         saveData.selectedCharacter = selectedCharacter;
         SaveManager.Save(saveData);
+        displayData(selectedCharacter);
     }
 
     public void buyCharacter(){
@@ -71,7 +80,7 @@ public class CharacterManagerScript : MonoBehaviour
     public void displayData(int selectedCharacter){
         cImage.sprite = characters[selectedCharacter];
         nameText.text = getName(selectedCharacter);
-        totalOranges.text = saveData.oranges.ToString();
+        totalOrangesText.text = saveData.oranges.ToString();
         if(!isUnlocked(selectedCharacter)){
             unlockText.text = getConditions(selectedCharacter);
             select.gameObject.SetActive(false);
@@ -92,5 +101,35 @@ public class CharacterManagerScript : MonoBehaviour
             select.gameObject.SetActive(true);
             buy.gameObject.SetActive(false);
         }
+    }
+
+    public void resetHighScore(){
+        saveData.highScore = 0;
+        SaveManager.Save(saveData);
+    }
+
+    public void resetOranges(){
+        saveData.oranges = 0;
+        SaveManager.Save(saveData);
+    }
+
+    public void resetCharacters(){
+        for(int x = 1; x < saveData.characters.Count; x++){
+            saveData.characters[x].unlocked = false;
+        }
+        saveData.selectedCharacter = 0;
+        SaveManager.Save(saveData);
+    }
+
+    //Displays the current highscore count when the "Reset Highscore" Button is pressed
+    public void highScoreButton(){
+        highScore = saveData.highScore;
+        scoreResetText.text = "Reset Highscore (" + highScore + ")?";
+    }
+
+    //Displays the current oranges count when the "Reset Oranges" Button is pressed
+    public void orangesButton(){
+        totalOranges = saveData.oranges;
+        orangesResetText.text = "Reset Oranges (" + totalOranges + ")?";
     }
 }
