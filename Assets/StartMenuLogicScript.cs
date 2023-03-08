@@ -121,6 +121,12 @@ public class StartMenuLogicScript : MonoBehaviour
         SaveManager.Save(saveData);
     }
 
+    public void resetAll(){
+        SaveManager.Delete();
+        saveData = SaveManager.Load();
+        SaveManager.Save(saveData);
+    }
+
     //Displays the current highscore count when the "Reset Highscore" Button is pressed
     public void highScoreButton(){
         highScore = saveData.highScore;

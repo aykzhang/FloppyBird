@@ -37,9 +37,20 @@ public static class SaveManager
                 Debug.Log("Failed to load file");
             }
         }
-
         return new SaveObject();
     }
+
+    public static void Delete(){
+        if(SaveExists()){
+            try{
+                File.Delete(GetFullPath());
+            }
+            catch (IOException ioExp){
+                Debug.Log(ioExp.Message);
+            }
+        }   
+    }
+    
     private static bool SaveExists(){
         return File.Exists(GetFullPath());
     }
