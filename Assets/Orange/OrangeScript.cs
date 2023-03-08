@@ -6,17 +6,19 @@ public class OrangeScript : MonoBehaviour
 {
     public LogicScript logic;
     public float deadZone = -40;
-    public float moveSpeed = 5;
+    public float moveSpeed;
     public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        moveSpeed = logic.gameMoveSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        updateSpeed();
         //move left
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
 
@@ -33,5 +35,9 @@ public class OrangeScript : MonoBehaviour
             animator.SetBool("Collected" , true);
             logic.addOranges(100);
         }     
+    }
+
+    public void updateSpeed(){
+        moveSpeed = logic.gameMoveSpeed; 
     }
 }

@@ -7,7 +7,7 @@ using TMPro;
 
 public class LogicScript : MonoBehaviour
 {
-    public int playerScore, highScore, playerOranges, totalOranges;
+    public int playerScore, highScore, playerOranges, totalOranges, gameMoveSpeed;
     public TMP_Text scoreText, orangesText, highScoreText, totalOrangesText;
     public bool birdAlive;
     public GameObject gameOverScreen;

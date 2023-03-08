@@ -13,6 +13,7 @@ public class BirdScript : MonoBehaviour
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         logic.birdAlive = true;
+        logic.gameMoveSpeed = 5;
     }
 
     // Update is called once per frame

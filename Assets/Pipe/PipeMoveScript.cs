@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class PipeMoveScript : MonoBehaviour
 {
-    public float moveSpeed = 5;
-    // Start is called before the first frame update
+    public float moveSpeed;
     public float deadZone = -40;
+    public LogicScript logic;
     void Start()
     {
-        
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        moveSpeed = logic.gameMoveSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        updateSpeed();
         //move left
         transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
 
@@ -23,5 +25,9 @@ public class PipeMoveScript : MonoBehaviour
             //Debug.Log("Pipe Deleted");
             Destroy(gameObject);
         }
+    }
+
+    public void updateSpeed(){
+        moveSpeed = logic.gameMoveSpeed; 
     }
 }
