@@ -172,10 +172,12 @@ MonoBehaviour:
       cost: 0
       unlockString: 
       characterName: Bird
+      description: 
     - unlocked: 0
       cost: 40
       unlockString: Spend 40 oranges to unlock
       characterName: Flippy
+      description: 
 --- !u!4 &140965287
 Transform:
   m_ObjectHideFlags: 0
@@ -686,6 +688,9 @@ MonoBehaviour:
   characters:
   - {fileID: 3432132226604081885, guid: 0898e18d0b4294040b25f2c50f9dbaa4, type: 3}
   - {fileID: 5854486177534140660, guid: fe5e08f44c280cd49b29120349c3cdd4, type: 3}
+  - {fileID: 3910616651913883424, guid: a15300cd3ee98f34abc39bf5de368901, type: 3}
+  - {fileID: 4834633336751190395, guid: 57eb4f9ce13edc64185cccf44af5c24f, type: 3}
+  - {fileID: 6078129770238562744, guid: c630df4527de15647967fb47506cd2ba, type: 3}
   saveData:
     highScore: 0
     oranges: 0
@@ -695,10 +700,12 @@ MonoBehaviour:
       cost: 0
       unlockString: 
       characterName: Bird
+      description: 
     - unlocked: 0
       cost: 40
       unlockString: Spend 40 oranges to unlock
       characterName: Flippy
+      description: 
 --- !u!4 &1172600949
 Transform:
   m_ObjectHideFlags: 0
@@ -1210,6 +1217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 4362585424981044646, guid: bebbc7f83ca21de429c567299c57d847, type: 3}
   spawnRate: 10
+  logic: {fileID: 0}
 --- !u!4 &1735639991
 Transform:
   m_ObjectHideFlags: 0

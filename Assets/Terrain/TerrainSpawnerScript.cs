@@ -7,15 +7,18 @@ public class TerrainSpawnerScript : MonoBehaviour
     public GameObject terrain;
     public float spawnRate = 10;
     private float timer = 0;
+    public LogicScript logic;
     // Start is called before the first frame update
     void Start()
     {
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         SpawnTerrain();
     }
 
     // Update is called once per frame
     void Update()
     {
+        spawnRate = 5f * (10f / logic.gameMoveSpeed);
         //If timer < spawnrate, timer goes up
         if (timer < spawnRate)
         {       

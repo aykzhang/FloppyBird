@@ -19,6 +19,7 @@ public class PipeSpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        spawnRate = 5f * (5f / logic.gameMoveSpeed);
         float multiplier = (100f-logic.playerScore)/100;
 
         //Debug.Log("score: " + logic.playerScore + " multiplier: " + multiplier);

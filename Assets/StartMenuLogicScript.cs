@@ -12,7 +12,7 @@ public class StartMenuLogicScript : MonoBehaviour
     public List<Sprite> characters = new List<Sprite>();
     private int selectedCharacter;
     public SaveObject saveData;
-    public TMP_Text nameText, unlockText, totalOrangesText;
+    public TMP_Text nameText, unlockText, totalOrangesText, descriptionText;
     public Button select, buy;
     public Sprite buySprite, notEnoughSprite;
     public int highScore, totalOranges;
@@ -73,6 +73,10 @@ public class StartMenuLogicScript : MonoBehaviour
         return getCharacter(selectedCharacter).unlockString;
     }
 
+    public string getDesc(int selectedCharacter){
+        return getCharacter(selectedCharacter).description;
+    }   
+
     public CharacterData getCharacter(int selectedCharacter){
         return saveData.characters[selectedCharacter];
     }
@@ -81,6 +85,7 @@ public class StartMenuLogicScript : MonoBehaviour
         cImage.sprite = characters[selectedCharacter];
         nameText.text = getName(selectedCharacter);
         totalOrangesText.text = saveData.oranges.ToString();
+        descriptionText.text = getDesc(selectedCharacter);
         if(!isUnlocked(selectedCharacter)){
             unlockText.text = getConditions(selectedCharacter);
             select.gameObject.SetActive(false);

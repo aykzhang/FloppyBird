@@ -9,4 +9,5 @@ public class CharacterData
     public int cost;
     public string unlockString;
     public string characterName;
+    public string description;
 }

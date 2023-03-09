@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScoreZoneScript : MonoBehaviour
 {
     public LogicScript logic;
+    public bool scored = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,8 @@ public class ScoreZoneScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision){
         //assign bird to layer 3 in Unity
         //if the object is in layer 3, addscore
-        if(collision.gameObject.layer == 3 && logic.birdAlive){
+        if(collision.gameObject.layer == 3 && logic.birdAlive && scored == false){
+            scored = true;
             logic.addScore(1);
         }       
     }

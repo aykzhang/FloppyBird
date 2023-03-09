@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: fca3aca22d116cf429faac11c169e1fe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - myRigidBody: {instanceID: 0}
+  - logic: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
