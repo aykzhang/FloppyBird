@@ -26,7 +26,9 @@ public class AudioManagerScript : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " not found");
             return;
         }
-        s.source.Play();
+        //Only play if not muted by settings
+        if((PlayerPrefs.GetInt("Music") == 0 && s.type == 0) || (PlayerPrefs.GetInt("Sound") == 0 && s.type == 1))
+            s.source.Play();
     }
 
     public void Stop(string name){

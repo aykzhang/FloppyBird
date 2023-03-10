@@ -13,5 +13,7 @@ public class Sound
     public bool loop;
     [HideInInspector]
     public AudioSource source;
+    //0 is bgm, 1 is sfx
+    public int type;
 
 }

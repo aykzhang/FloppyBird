@@ -17,12 +17,27 @@ public class StartMenuLogicScript : MonoBehaviour
     public Sprite buySprite, notEnoughSprite;
     public int highScore, totalOranges;
     public TMP_Text scoreResetText, orangesResetText;
-
+    public Toggle musicToggle, soundToggle;
     void Start(){
         saveData = SaveManager.Load();
         highScore = saveData.highScore;
         totalOranges = saveData.oranges;
         FindObjectOfType<AudioManagerScript>().Play("Start Menu Theme");
+
+
+        //Set Sound and Music Toggles
+        if(PlayerPrefs.GetInt("Sound") == 1){
+            soundToggle.isOn = true;
+        }
+        if(PlayerPrefs.GetInt("Sound") == 0){
+            soundToggle.isOn = false;
+        }
+        if(PlayerPrefs.GetInt("Music") == 1){
+            musicToggle.isOn = true;
+        }
+        if(PlayerPrefs.GetInt("Music") == 0){
+            musicToggle.isOn = false;
+        }
     }
 
     public void Open()
@@ -33,6 +48,7 @@ public class StartMenuLogicScript : MonoBehaviour
         displayData(saveData.selectedCharacter);
     }
 
+    //Controls next button on Character Select
     public void NextOption(){
         selectedCharacter += 1;
         if(selectedCharacter >= characters.Count){
@@ -41,6 +57,7 @@ public class StartMenuLogicScript : MonoBehaviour
         displayData(selectedCharacter);
     }
 
+    //Controls prev button on Character Select
     public void PrevOption(){
         selectedCharacter -= 1;
         if(selectedCharacter < 0){
@@ -49,12 +66,14 @@ public class StartMenuLogicScript : MonoBehaviour
         displayData(selectedCharacter);
     }  
 
+    //Sets selected character on Character Select
     public void setSelectedCharacter(){
         saveData.selectedCharacter = selectedCharacter;
         SaveManager.Save(saveData);
         displayData(selectedCharacter);
     }
 
+    //Buys selected character on Character Select
     public void buyCharacter(){
         saveData.oranges -= getCharacter(selectedCharacter).cost;
         getCharacter(selectedCharacter).unlocked = true;
@@ -82,25 +101,33 @@ public class StartMenuLogicScript : MonoBehaviour
         return saveData.characters[selectedCharacter];
     }
 
+    //Updates Character Select Screen
     public void displayData(int selectedCharacter){
         cImage.sprite = characters[selectedCharacter];
         nameText.text = getName(selectedCharacter);
         totalOrangesText.text = saveData.oranges.ToString();
         descriptionText.text = getDesc(selectedCharacter);
+
+        //Character is locked
         if(!isUnlocked(selectedCharacter)){
+            //Change Select button to buy button
             unlockText.text = getConditions(selectedCharacter);
             select.gameObject.SetActive(false);
             buy.gameObject.SetActive(true);
             cImage.color = Color.black;
+            //Changes Buy button image from buy to not enough
             if(saveData.oranges < getCharacter(selectedCharacter).cost){
                 buy.interactable = false;
                 buy.image.sprite = notEnoughSprite;
             }
+            //Changes image of Buy Button to Buy Image
             else{
                 buy.interactable = true;
                 buy.image.sprite = buySprite;
             }
         }
+
+        //Character is unlocked
         else{
             cImage.color = Color.white;
             unlockText.text = "";
@@ -143,5 +170,25 @@ public class StartMenuLogicScript : MonoBehaviour
     public void orangesButton(){
         totalOranges = saveData.oranges;
         orangesResetText.text = "Reset Oranges (" + totalOranges + ")?";
+    }
+
+    public void MusicToggle(){
+        if(musicToggle.isOn == true){
+            PlayerPrefs.SetInt("Music", 1);
+            FindObjectOfType<AudioManagerScript>().Stop("Start Menu Theme");
+        }
+        else{
+            PlayerPrefs.SetInt("Music", 0);
+            FindObjectOfType<AudioManagerScript>().Play("Start Menu Theme");
+        }
+    }
+
+    public void SoundToggle(){
+        if(soundToggle.isOn == true){
+            PlayerPrefs.SetInt("Sound", 1);
+        }
+        else{
+            PlayerPrefs.SetInt("Sound", 0);
+        }
     }
 }
