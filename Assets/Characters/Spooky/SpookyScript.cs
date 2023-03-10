@@ -28,6 +28,7 @@ public class SpookyScript : MonoBehaviour
         //Press space to go up
         if (Input.GetKeyDown(KeyCode.Space) && logic.birdAlive)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Jump");
             myRigidBody.velocity = Vector2.up * flapStrength;
         }
         Color spriteColor = sprite.color;
@@ -60,6 +61,7 @@ public class SpookyScript : MonoBehaviour
     //Game Over Trigger
     private void OnCollisionEnter2D(Collision2D collision){
         if (logic.birdAlive == true){
+            FindObjectOfType<AudioManagerScript>().Play("Dead");
             logic.gameOver();
         }
         logic.birdAlive = false;

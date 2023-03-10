@@ -33,6 +33,7 @@ public class OrangeScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.layer == 3 && logic.birdAlive && !(animator.GetBool("Collected"))){
             animator.SetBool("Collected" , true);
+            FindObjectOfType<AudioManagerScript>().Play("Orange");
             logic.addOranges(100);
         }     
     }

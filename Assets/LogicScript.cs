@@ -17,6 +17,7 @@ public class LogicScript : MonoBehaviour
         saveData = SaveManager.Load();
         highScore = saveData.highScore;
         totalOranges = saveData.oranges;
+        FindObjectOfType<AudioManagerScript>().Play("Main Game Theme");
     }
     
     //makes it possible to call function in unity with the extra menu on top right

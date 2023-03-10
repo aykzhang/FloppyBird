@@ -25,6 +25,7 @@ public class ScoreZoneScript : MonoBehaviour
         //assign bird to layer 3 in Unity
         //if the object is in layer 3, addscore
         if(collision.gameObject.layer == 3 && logic.birdAlive && scored == false){
+            FindObjectOfType<AudioManagerScript>().Play("Score");
             scored = true;
             logic.addScore(1);
         }       

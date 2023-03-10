@@ -12,6 +12,7 @@ public class TerrainSpawnerScript : MonoBehaviour
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        Instantiate(terrain, new Vector3(4.897408f ,1.008987f ,-0.2391459f), transform.rotation);
         SpawnTerrain();
     }
 

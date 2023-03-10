@@ -25,6 +25,9 @@ public class FlightyScript : MonoBehaviour
     void Update()
     {
         //Press space to go up
+        if(Input.GetKeyDown(KeyCode.Space) && logic.birdAlive){
+            FindObjectOfType<AudioManagerScript>().Play("Flight");
+        }
         if (Input.GetKey(KeyCode.Space) && logic.birdAlive)
         {
             sr.sprite = flightSpriteFire;
@@ -32,6 +35,7 @@ public class FlightyScript : MonoBehaviour
             flapStrength = flapStrength + boostStrength + Time.deltaTime;
         }
         else{
+            FindObjectOfType<AudioManagerScript>().Stop("Flight");
             sr.sprite = flightySprite;
             flapStrength = flapBase;
         }
@@ -40,6 +44,7 @@ public class FlightyScript : MonoBehaviour
     //Game Over Trigger
     private void OnCollisionEnter2D(Collision2D collision){
         if (logic.birdAlive == true){
+            FindObjectOfType<AudioManagerScript>().Play("Dead");
             logic.gameOver();
         }
         logic.birdAlive = false;

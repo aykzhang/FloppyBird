@@ -22,6 +22,7 @@ public class StartMenuLogicScript : MonoBehaviour
         saveData = SaveManager.Load();
         highScore = saveData.highScore;
         totalOranges = saveData.oranges;
+        FindObjectOfType<AudioManagerScript>().Play("Start Menu Theme");
     }
 
     public void Open()

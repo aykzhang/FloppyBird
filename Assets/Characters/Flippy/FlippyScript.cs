@@ -21,6 +21,7 @@ public class FlippyScript : MonoBehaviour
         //Press space to go up
         if (Input.GetKeyDown(KeyCode.Space) && logic.birdAlive)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Jump");
             myRigidBody.velocity = Vector2.down * flapStrength;
         }
     }
@@ -28,6 +29,7 @@ public class FlippyScript : MonoBehaviour
     //Game Over Trigger
     private void OnCollisionEnter2D(Collision2D collision){
         if (logic.birdAlive == true){
+            FindObjectOfType<AudioManagerScript>().Play("Dead");
             logic.gameOver();
         }
         logic.birdAlive = false;
