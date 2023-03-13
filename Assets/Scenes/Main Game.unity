@@ -993,6 +993,8 @@ MonoBehaviour:
   - {fileID: 3910616651913883424, guid: a15300cd3ee98f34abc39bf5de368901, type: 3}
   - {fileID: 4834633336751190395, guid: 57eb4f9ce13edc64185cccf44af5c24f, type: 3}
   - {fileID: 6078129770238562744, guid: c630df4527de15647967fb47506cd2ba, type: 3}
+  - {fileID: 6145454896131906555, guid: 290bbf9ff452e2d42b22809bdabe92bb, type: 3}
+  - {fileID: 1804078241553476736, guid: e490f99e5a9d8e14188be16df4a027ef, type: 3}
   saveData:
     highScore: 0
     oranges: 0
@@ -6762,9 +6764,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orange: {fileID: 208021227194858534, guid: 5867a35401d312f4ab8b9ab863e4449d, type: 3}
-  spawnRate: 8
+  orangeBasket: {fileID: 749025957181516879, guid: cea09acd68236104e91b2e750a614e1b, type: 3}
+  spawnRate: 7
   heightOffset: 8
   logic: {fileID: 0}
+  basketChance: 30
 --- !u!4 &2013600728
 Transform:
   m_ObjectHideFlags: 0

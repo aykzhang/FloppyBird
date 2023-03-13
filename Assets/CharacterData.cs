@@ -10,4 +10,6 @@ public class CharacterData
     public string unlockString;
     public string characterName;
     public string description;
+    public int characterHighScore;
+    public int characterOrangeTotal;
 }
