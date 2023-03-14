@@ -7,7 +7,7 @@ public class OrangeSpawnScript : MonoBehaviour
     public GameObject orange;
     public GameObject orangeBasket;
     public float spawnRate = 5;
-    private float timer = -3;
+    private float timer = 0;
     public float heightOffset = 8;
     public LogicScript logic;
     public int basketChance = 30;

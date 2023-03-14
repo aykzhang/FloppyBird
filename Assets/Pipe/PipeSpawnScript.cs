@@ -22,7 +22,6 @@ public class PipeSpawnScript : MonoBehaviour
         spawnRate = 5f * (5f / logic.gameMoveSpeed);
         float multiplier = (100f-logic.playerScore)/100;
 
-        //Debug.Log("score: " + logic.playerScore + " multiplier: " + multiplier);
         if (multiplier < .5f){
             multiplier = .5f;
         }

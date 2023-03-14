@@ -7,16 +7,22 @@ using TMPro;
 
 public class LogicScript : MonoBehaviour
 {
-    public int playerScore, highScore, playerOranges, totalOranges, gameMoveSpeed;
-    public TMP_Text scoreText, orangesText, highScoreText, totalOrangesText;
+    public int playerScore, highScore, playerOranges, totalOranges, gameMoveSpeed, characterHighScore, characterOranges;
+    public TMP_Text scoreText, orangesText, highScoreText, totalOrangesText, instructionsText;
     public bool birdAlive;
     public GameObject gameOverScreen;
     public SaveObject saveData;
  
     void Start(){
         saveData = SaveManager.Load();
+        //overall highscore and oranges
         highScore = saveData.highScore;
         totalOranges = saveData.oranges;
+        //character specific highscore and oranges
+        characterHighScore = saveData.characters[saveData.selectedCharacter].characterHighScore;
+        characterOranges = saveData.characters[saveData.selectedCharacter].characterOrangeTotal;
+        //display instructions
+        instructionsText.text = saveData.characters[saveData.selectedCharacter].instructions;
         FindObjectOfType<AudioManagerScript>().Play("Main Game Theme");
     }
     
@@ -37,7 +43,13 @@ public class LogicScript : MonoBehaviour
     }
  
     public void gameOver(){
-        //Checks for highscore and oranges
+        //Check character highscore and oranges
+        if(playerScore > characterHighScore){
+            characterHighScore = playerScore;
+        }
+        characterOranges += playerOranges;
+
+        //Checks for overall highscore and oranges
         if(playerScore > highScore){
             highScore = playerScore;   
         }
@@ -46,6 +58,8 @@ public class LogicScript : MonoBehaviour
         //Saves any data from run
         saveData.highScore = highScore;
         saveData.oranges = totalOranges;
+        saveData.characters[saveData.selectedCharacter].characterHighScore = characterHighScore;
+        saveData.characters[saveData.selectedCharacter].characterOrangeTotal = characterOranges;
 
         SaveManager.Save(saveData);
 

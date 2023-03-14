@@ -25,7 +25,7 @@ public class TurnyScript : MonoBehaviour
         //Press space to go up
         if (Input.GetKeyDown(KeyCode.Space) && logic.birdAlive)
         {
-            FindObjectOfType<AudioManagerScript>().Play("Jump");
+            FindObjectOfType<AudioManagerScript>().Play("Flip");
             myRigidBody.gravityScale = myRigidBody.gravityScale * -1;
             if(myRigidBody.gravityScale > 0){
                 sr.sprite = turnySprite;

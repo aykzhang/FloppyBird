@@ -34,7 +34,7 @@ public class OrangeScript : MonoBehaviour
         if(collision.gameObject.layer == 3 && logic.birdAlive && !(animator.GetBool("Collected"))){
             animator.SetBool("Collected" , true);
             FindObjectOfType<AudioManagerScript>().Play("Orange");
-            logic.addOranges(100);
+            logic.addOranges(1);
         }     
     }
 

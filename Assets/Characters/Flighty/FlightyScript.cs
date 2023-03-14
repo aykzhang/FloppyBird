@@ -24,7 +24,7 @@ public class FlightyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Press space to go up
+        //Hold space to go up
         if(Input.GetKeyDown(KeyCode.Space) && logic.birdAlive){
             FindObjectOfType<AudioManagerScript>().Play("Flight");
         }

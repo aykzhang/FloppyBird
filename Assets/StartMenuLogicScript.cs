@@ -18,6 +18,9 @@ public class StartMenuLogicScript : MonoBehaviour
     public int highScore, totalOranges;
     public TMP_Text scoreResetText, orangesResetText;
     public Toggle musicToggle, soundToggle;
+    public TMP_Text[] characterHighScores, characterTotalOranges;
+    public Image[] statSprites;
+
     void Start(){
         saveData = SaveManager.Load();
         highScore = saveData.highScore;
@@ -137,11 +140,17 @@ public class StartMenuLogicScript : MonoBehaviour
     }
 
     public void resetHighScore(){
+        for(int x = 0; x < saveData.characters.Count; x++){
+            saveData.characters[x].characterHighScore = 0;
+        }
         saveData.highScore = 0;
         SaveManager.Save(saveData);
     }
 
     public void resetOranges(){
+        for(int x = 0; x < saveData.characters.Count; x++){
+            saveData.characters[x].characterOrangeTotal = 0;
+        }
         saveData.oranges = 0;
         SaveManager.Save(saveData);
     }
@@ -163,15 +172,16 @@ public class StartMenuLogicScript : MonoBehaviour
     //Displays the current highscore count when the "Reset Highscore" Button is pressed
     public void highScoreButton(){
         highScore = saveData.highScore;
-        scoreResetText.text = "Reset Highscore (" + highScore + ")?";
+        scoreResetText.text = "Reset Highscore (" + highScore + ") and all character Highscores?";
     }
 
     //Displays the current oranges count when the "Reset Oranges" Button is pressed
     public void orangesButton(){
         totalOranges = saveData.oranges;
-        orangesResetText.text = "Reset Oranges (" + totalOranges + ")?";
+        orangesResetText.text = "Reset Oranges (" + totalOranges + ") and all character orange counts?";
     }
 
+    //Updates music preference
     public void MusicToggle(){
         if(musicToggle.isOn == true){
             PlayerPrefs.SetInt("Music", 1);
@@ -183,12 +193,27 @@ public class StartMenuLogicScript : MonoBehaviour
         }
     }
 
+    //Updates sound preferences
     public void SoundToggle(){
         if(soundToggle.isOn == true){
             PlayerPrefs.SetInt("Sound", 1);
         }
         else{
             PlayerPrefs.SetInt("Sound", 0);
+        }
+    }
+
+    //Display all character stats when the Stats button is pressed
+    public void Stats(){
+        for(int x = 0; x < saveData.characters.Count; x++){
+            characterHighScores[x].text = saveData.characters[x].characterHighScore.ToString();
+            characterTotalOranges[x].text = saveData.characters[x].characterOrangeTotal.ToString();
+            if(isUnlocked(x)){
+                statSprites[x].color = Color.white;
+            }
+            else{
+                statSprites[x].color = Color.black;
+            }
         }
     }
 }
