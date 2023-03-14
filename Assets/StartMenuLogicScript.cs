@@ -216,4 +216,9 @@ public class StartMenuLogicScript : MonoBehaviour
             }
         }
     }
+
+    //Quits Game
+    public void QuitGame(){
+        Application.Quit();
+    }
 }
